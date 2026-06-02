@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/useAuth";
 import "./Auth.css";
 
 export default function LoginPage() {
@@ -33,7 +33,7 @@ export default function LoginPage() {
     <div className="auth-container">
       <div className="auth-card">
         <div className="auth-header">
-          <div className="auth-logo">⬡</div>
+          <span className="auth-logo">⬡</span>
           <h1>Welcome back</h1>
           <p>Sign in to your account</p>
         </div>

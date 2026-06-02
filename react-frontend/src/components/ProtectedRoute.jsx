@@ -1,5 +1,5 @@
 import { Navigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/useAuth";
 
 export default function ProtectedRoute({ children }) {
   const { user, loading } = useAuth();
@@ -14,10 +14,10 @@ export default function ProtectedRoute({ children }) {
           justifyContent: "center",
           background: "#0f1117",
           color: "#6366f1",
-          fontSize: "1.5rem",
+          fontSize: "2rem",
         }}
       >
-        ⬡
+        Loading...
       </div>
     );
   }

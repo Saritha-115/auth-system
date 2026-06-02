@@ -1,22 +1,13 @@
-:root {
-  --bg: #0f1117;
-  --surface: #1a1d27;
-  --border: #2a2d3a;
-  --accent: #6366f1;
-  --text: #e8eaf0;
-  --muted: #8b8fa8;
-}
-
 .dashboard {
   min-height: 100vh;
-  background: var(--bg);
-  color: var(--text);
+  background: #0f1117;
+  color: #e8eaf0;
   font-family: 'Inter', -apple-system, sans-serif;
 }
 
 .dashboard-header {
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
+  background: #1a1d27;
+  border-bottom: 1px solid #2a2d3a;
   padding: 1rem 2rem;
   display: flex;
   align-items: center;
@@ -26,7 +17,7 @@
 .dashboard-logo {
   font-size: 1.1rem;
   font-weight: 700;
-  color: var(--accent);
+  color: #6366f1;
   letter-spacing: -0.02em;
 }
 
@@ -41,7 +32,7 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: var(--accent);
+  background: #6366f1;
   color: white;
   display: flex;
   align-items: center;
@@ -52,8 +43,8 @@
 
 .logout-btn {
   background: transparent;
-  border: 1px solid var(--border);
-  color: var(--muted);
+  border: 1px solid #2a2d3a;
+  color: #8b8fa8;
   padding: 0.4rem 0.9rem;
   border-radius: 6px;
   cursor: pointer;
@@ -62,8 +53,8 @@
 }
 
 .logout-btn:hover {
-  color: var(--text);
-  border-color: var(--accent);
+  color: #e8eaf0;
+  border-color: #6366f1;
 }
 
 .dashboard-main {
@@ -85,9 +76,10 @@
   font-weight: 700;
   letter-spacing: -0.02em;
   margin-bottom: 0.5rem;
+  color: #e8eaf0;
 }
 
-.welcome-card p { color: var(--muted); }
+.welcome-card p { color: #8b8fa8; }
 
 .info-grid {
   display: grid;
@@ -97,8 +89,8 @@
 }
 
 .info-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
+  background: #1a1d27;
+  border: 1px solid #2a2d3a;
   border-radius: 12px;
   padding: 1.25rem;
 }
@@ -107,14 +99,14 @@
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--muted);
+  color: #8b8fa8;
   margin-bottom: 0.5rem;
 }
 
 .info-value {
   font-size: 1rem;
   font-weight: 600;
-  color: var(--text);
+  color: #e8eaf0;
   word-break: break-all;
 }
 
@@ -128,8 +120,8 @@
 }
 
 .jwt-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
+  background: #1a1d27;
+  border: 1px solid #2a2d3a;
   border-radius: 12px;
   padding: 1.25rem;
 }
@@ -138,7 +130,7 @@
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--muted);
+  color: #8b8fa8;
   margin-bottom: 0.75rem;
 }
 

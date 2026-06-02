@@ -59,7 +59,7 @@ export default function RegisterPage() {
     <div className="auth-container">
       <div className="auth-card auth-card--wide">
         <div className="auth-header">
-          <div className="auth-logo">⬡</div>
+          <span className="auth-logo">⬡</span>
           <h1>Create account</h1>
           <p>Get started for free</p>
         </div>

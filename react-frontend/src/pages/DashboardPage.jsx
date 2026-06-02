@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/useAuth";
 import "./Dashboard.css";
 
 export default function DashboardPage() {
@@ -47,12 +47,14 @@ export default function DashboardPage() {
           </div>
           <div className="info-card">
             <div className="info-label">Role</div>
-            <div className="info-value role-badge">{user?.role}</div>
+            <div className="info-value">
+              <span className="role-badge">{user?.role}</span>
+            </div>
           </div>
         </div>
 
         <div className="jwt-card">
-          <div className="jwt-label">JWT Token (stored in localStorage)</div>
+          <div className="jwt-label">JWT Token</div>
           <code className="jwt-value">
             {localStorage.getItem("token")?.substring(0, 60)}...
           </code>
