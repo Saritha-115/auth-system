@@ -1,6 +1,8 @@
 package com.example.api_gateway.filter;
 
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
@@ -26,6 +28,7 @@ public class JwtAuthFilter extends AbstractGatewayFilterFactory<JwtAuthFilter.Co
     @Override
     public GatewayFilter apply(Config config) {
         return (exchange, chain) -> {
+
             String authHeader = exchange.getRequest()
                     .getHeaders()
                     .getFirst(HttpHeaders.AUTHORIZATION);
@@ -38,21 +41,22 @@ public class JwtAuthFilter extends AbstractGatewayFilterFactory<JwtAuthFilter.Co
 
             try {
                 Key key = Keys.hmacShaKeyFor(secret.getBytes());
+
                 Claims claims = Jwts.parserBuilder()
                         .setSigningKey(key)
                         .build()
                         .parseClaimsJws(token)
                         .getBody();
 
-                // Forward user info to downstream services
                 exchange = exchange.mutate()
                         .request(r -> r
                                 .header("X-User-Name", claims.getSubject())
-                                .header("X-User-Role", claims.get("role", String.class))
+                                .header("X-User-Role", String.valueOf(claims.get("role")))
                         )
                         .build();
 
                 return chain.filter(exchange);
+
             } catch (JwtException e) {
                 return onError(exchange, HttpStatus.UNAUTHORIZED);
             }
