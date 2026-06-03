@@ -29,6 +29,27 @@ services:
     networks:
       - auth-network
 
+  api-gateway:
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
+    container_name: api-gateway
+    environment:
+      AUTH_SERVICE_URL: http://auth-service:8081
+      USER_SERVICE_URL: http://user-service:8082
+      JWT_SECRET: ${JWT_SECRET:-mySecretKey123456789012345678901234567890}
+      SPRING_REDIS_HOST: redis
+      SPRING_REDIS_PORT: 6379
+    ports:
+      - "8080:8080"
+    depends_on:
+      - auth-service
+      - user-service
+      - redis
+    networks:
+      - auth-network
+    restart: unless-stopped
+
   auth-service:
     build:
       context: ./auth-service
@@ -47,6 +68,7 @@ services:
         condition: service_healthy
     networks:
       - auth-network
+    restart: unless-stopped
 
   user-service:
     build:
@@ -64,24 +86,7 @@ services:
         condition: service_healthy
     networks:
       - auth-network
-
-  api-gateway:
-    build:
-      context: ./api-gateway
-      dockerfile: Dockerfile
-    container_name: api-gateway
-    environment:
-      AUTH_SERVICE_URL: http://auth-service:8081
-      USER_SERVICE_URL: http://user-service:8082
-      JWT_SECRET: ${JWT_SECRET:-mySecretKey123456789012345678901234567890}
-    ports:
-      - "8080:8080"
-    depends_on:
-      - auth-service
-      - user-service
-      - redis
-    networks:
-      - auth-network
+    restart: unless-stopped
 
   react-app:
     build:

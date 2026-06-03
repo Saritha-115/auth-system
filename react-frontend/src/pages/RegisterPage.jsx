@@ -12,6 +12,7 @@ export default function RegisterPage() {
     firstName: "",
     lastName: "",
   });
+
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -34,21 +35,32 @@ export default function RegisterPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+
     if (!validate()) return;
+
     setLoading(true);
 
     try {
-      await userApi.register({
+      const res = await userApi.register({
         username: form.username,
         email: form.email,
         password: form.password,
         firstName: form.firstName,
         lastName: form.lastName,
       });
+
+      console.log("SUCCESS RESPONSE:", res.data);
+
+      // ALWAYS assume success if no error thrown
       navigate("/login", { state: { registered: true } });
     } catch (err) {
+      console.log("ERROR:", err);
+
       setError(
-        err.response?.data?.message || "Registration failed. Please try again.",
+        err.response?.data?.message ||
+          err.response?.data?.error ||
+          err.message ||
+          "Registration failed",
       );
     } finally {
       setLoading(false);
@@ -69,23 +81,18 @@ export default function RegisterPage() {
         <form onSubmit={handleSubmit} className="auth-form">
           <div className="form-row">
             <div className="form-group">
-              <label htmlFor="firstName">First name</label>
+              <label>First name</label>
               <input
-                id="firstName"
                 name="firstName"
-                type="text"
-                placeholder="First name"
                 value={form.firstName}
                 onChange={handleChange}
               />
             </div>
+
             <div className="form-group">
-              <label htmlFor="lastName">Last name</label>
+              <label>Last name</label>
               <input
-                id="lastName"
                 name="lastName"
-                type="text"
-                placeholder="Last name"
                 value={form.lastName}
                 onChange={handleChange}
               />
@@ -93,59 +100,50 @@ export default function RegisterPage() {
           </div>
 
           <div className="form-group">
-            <label htmlFor="username">Username *</label>
+            <label>Username *</label>
             <input
-              id="username"
               name="username"
-              type="text"
               required
-              placeholder="Choose a username"
               value={form.username}
               onChange={handleChange}
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="email">Email *</label>
+            <label>Email *</label>
             <input
-              id="email"
               name="email"
               type="email"
               required
-              placeholder="you@example.com"
               value={form.email}
               onChange={handleChange}
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="password">Password *</label>
+            <label>Password *</label>
             <input
-              id="password"
               name="password"
               type="password"
               required
-              placeholder="Min. 8 characters"
               value={form.password}
               onChange={handleChange}
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="confirmPassword">Confirm password *</label>
+            <label>Confirm Password *</label>
             <input
-              id="confirmPassword"
               name="confirmPassword"
               type="password"
               required
-              placeholder="Repeat your password"
               value={form.confirmPassword}
               onChange={handleChange}
             />
           </div>
 
           <button type="submit" className="auth-btn" disabled={loading}>
-            {loading ? <span className="spinner" /> : "Create Account"}
+            {loading ? "Creating..." : "Create Account"}
           </button>
         </form>
 
