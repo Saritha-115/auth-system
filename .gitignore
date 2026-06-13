@@ -1,8 +1,8 @@
-# Maven
+﻿# Maven
 **/target/
 !.mvn/wrapper/maven-wrapper.jar
 
-# SonarQube
+# SonarCloud
 .sonar/
 .sonar-token
 .scannerwork/
@@ -17,7 +17,7 @@
 *.log
 logs/
 
-# Docker
+# Docker (not needed for SonarCloud)
 volumes/
 postgres-data/
 redis-data/
