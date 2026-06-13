@@ -15,6 +15,7 @@
     <bytecodeTargetLevel>
       <module name="api-gateway" target="19" />
       <module name="auth-service" target="19" />
+      <module name="auth-system" target="19" />
       <module name="user-service" target="19" />
     </bytecodeTargetLevel>
   </component>

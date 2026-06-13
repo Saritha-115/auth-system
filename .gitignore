@@ -1,0 +1,28 @@
+﻿# Maven
+**/target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# SonarCloud
+.sonar/
+.sonar-token
+.scannerwork/
+
+# IDE
+.vscode/
+.idea/
+*.iml
+.DS_Store
+
+# Logs
+*.log
+logs/
+
+# Docker (not needed for SonarCloud)
+volumes/
+postgres-data/
+redis-data/
+
+# Test reports
+**/surefire-reports/
+**/jacoco.exec
+**/coverage/
