@@ -70,9 +70,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-		</dependency>
-
-	</dependencies>
+		</dependency></dependencies>
 
 	<dependencyManagement>
 		<dependencies>
@@ -82,8 +80,7 @@
 				<version>${spring-cloud.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
-			</dependency>
-		</dependencies>
+			</dependency></dependencies>
 	</dependencyManagement>
 
 
@@ -116,4 +113,6 @@
 	</build>
 
 </project>
+
+
 
