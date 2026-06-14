@@ -70,10 +70,9 @@ jobs:
           key: ${{ runner.os }}-sonar
 
       - name: Compile all services
-        run: |
-          mvn clean compile
+        run: mvn clean compile
 
-      - name: Generate coverage reports for SonarQube
+      - name: Generate coverage reports
         run: |
           cd auth-service && mvn jacoco:report && cd ..
           cd user-service && mvn jacoco:report && cd ..
@@ -83,12 +82,12 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        # NO binaries parameter - let SonarQube auto-discover
         run: |
           mvn sonar:sonar \
             -Dsonar.projectKey=Saritha-115_auth-system \
             -Dsonar.host.url=$SONAR_HOST_URL \
-            -Dsonar.login=$SONAR_TOKEN \
-            -Dsonar.java.binaries=auth-service/target/classes,user-service/target/classes,api-gateway/target/classes
+            -Dsonar.login=$SONAR_TOKEN
 
   build:
     runs-on: ubuntu-latest
